@@ -30,6 +30,19 @@ registerrouter.post("/register",async(req,res)=>{
     }
 });
 
+registerrouter.patch("/update/gamerequest/:id",async(req,res)=>{
+    try{
+        const user=await Register.findByIdAndUpdate(req.params.id,{
+            $set : {alert:req.body.alert}
+             
+         }).lean();
+    return res.status(200).send(user)
+    }
+    catch (error) {
+        res.status(400).send({message:error.message});
+    }
+})
+
 registerrouter.put("/userpushnotification/:id",async(req,res)=>{
     try{
         const userData=await Register.findOneAndUpdate({_id:req.params.id},{$push:{

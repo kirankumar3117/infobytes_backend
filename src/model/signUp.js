@@ -19,8 +19,8 @@ const signUp= new mongoose.Schema({
     },
     uuid:{type:String},
     play:{type:Boolean,default:false},
-    alert:{type:String},
-    games:{type:Object},
+    alert:{type:Object,default:{}},
+    games:{type:Object,default:{}},
     notification:{type:Array,default:[]},
     data:{type:Array,default:[]}
 },
