@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose =require("mongoose");
 
 // connecting to mongodb data base using mongoose connection
 const connect=()=>{
@@ -7,4 +7,4 @@ const connect=()=>{
     )
 }
 
-export default connect;
+module.exports=connect;

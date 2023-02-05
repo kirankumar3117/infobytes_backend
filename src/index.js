@@ -1,8 +1,15 @@
-import express from "express"
-import cors from "cors"
-import mongoose from "mongoose"
+const express=require("express");
+const cors=require("cors");
+const mongoose=require("mongoose");
+const connect=require("../src/db/connect.js");
 
-import connect from "../src/db/connect.js"
+//signup controller import to use in router
+
+const registerrouter=require("./controllers/register.controller");
+const gamerouter = require("./controllers/game.controller.js");
+require("dotenv").config();
+
+const port=process.env.port || 8080;
 // assigning express router method to app
 const app=express();
 
@@ -17,12 +24,18 @@ app.get("/",(req,res)=>{
     })
 })
 
+app.use("/",registerrouter);
+app.use("/",gamerouter);
+
+
 //connecting to a port
 
-app.listen(8080,async(req,res)=>{
+app.listen(port,async(req,res)=>{
     try{
+     
         mongoose.set('strictQuery', false);
         await connect();
+        mongoose.set('bufferCommands', false);
        
         console.log("connected at the port 8080");
     }catch(err){
@@ -30,4 +43,4 @@ app.listen(8080,async(req,res)=>{
     }
 })
 
-export default app;
+module.exports=app;
