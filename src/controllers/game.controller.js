@@ -26,6 +26,16 @@ gamerouter.post("/creategame",async(req,res)=>{
     }
 })
 
+gamerouter.patch("/update/game/:id",async(req,res)=>{
+    try{
+        const user=await GameSchema.findByIdAndUpdate(req.params.id,{alert:req.body.alert}).lean();
+        console.log(user)
+    return res.status(200).send(user)
+    }
+    catch (error) {
+        res.status(400).send({message:error.message});
+    }
+})
 
 
 
