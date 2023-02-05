@@ -32,10 +32,8 @@ registerrouter.post("/register",async(req,res)=>{
 
 registerrouter.patch("/update/gamerequest/:id",async(req,res)=>{
     try{
-        const user=await Register.findByIdAndUpdate(req.params.id,{
-            $set : {alert:req.body.alert}
-             
-         }).lean();
+        const user=await Register.findByIdAndUpdate(req.params.id,{alert:req.body.alert}).lean();
+        console.log(user)
     return res.status(200).send(user)
     }
     catch (error) {
