@@ -15,6 +15,14 @@ gamerouter.get("/gamesall",async(req,res)=>{
         return res.status(400).send({message:err.message})
     }
 })
+gamerouter.get("/game/:id",async(req,res)=>{
+    try{
+        const games=await GameSchema.findById(req.params.id).lean().exec();
+        return res.status(200).send(games);
+    }catch(err){
+        return res.status(400).send({message:err.message})
+    }
+})
 
 gamerouter.post("/creategame",async(req,res)=>{
     try{
